@@ -29,7 +29,7 @@ public class DatabaseAutofilling {
 
     }
 
-    private static String getConnectionAdress(Configuration configuration) {
+    public static String getConnectionAdress(Configuration configuration) {
         return "jdbc:mysql://localhost:3306/" + configuration.getDatabase()
                 + "?user=" + configuration.getUsername()
                 + "&password=" + configuration.getPassword()
