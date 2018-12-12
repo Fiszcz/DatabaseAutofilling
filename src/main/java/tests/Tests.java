@@ -1,7 +1,8 @@
-package pl.auto.database;
+package tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pl.auto.database.OperationThread;
 
 public class Tests {
 
