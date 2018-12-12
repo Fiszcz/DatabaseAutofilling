@@ -23,11 +23,16 @@ public class OperationThread implements Runnable {
         String whichOperation = "";
         try {
             br = new BufferedReader(new FileReader(file));
+            String query;
 
             whichOperation = br.readLine().trim().toUpperCase();
             switch (whichOperation){
                 case "INSERT":
-                    String query = createInsertQuery(br);
+                    query = createInsertQuery(br);
+                    executeQuery(query);
+                    break;
+                case "DELETE":
+                    query = createDeleteQuery(br);
                     executeQuery(query);
                     break;
             }
@@ -74,6 +79,25 @@ public class OperationThread implements Runnable {
                 query += ",";
             else{
                 query += ";";
+                break;
+            }
+        }
+
+        return query;
+    }
+
+    private String createDeleteQuery(BufferedReader br) throws IOException {
+        String table = br.readLine().trim();
+        String id = br.readLine().trim();
+
+        String query = "DELETE FROM " + table + " WHERE " +  id + " IN ( ";
+
+        while(true){
+            query += br.readLine().trim();
+            if(br.ready())
+                query += ",";
+            else{
+                query += ");";
                 break;
             }
         }
