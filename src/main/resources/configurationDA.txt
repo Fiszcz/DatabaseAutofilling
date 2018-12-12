@@ -1,0 +1,4 @@
+username=root
+password=root
+database=autofilling
+frequencyOfRefresh=1000
