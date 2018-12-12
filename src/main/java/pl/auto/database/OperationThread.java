@@ -105,7 +105,7 @@ public class OperationThread implements Runnable {
         return query;
     }
 
-    private static String join(String[] parts, String delim) {
+    public static String join(String[] parts, String delim) {
         StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < parts.length; i++) {
