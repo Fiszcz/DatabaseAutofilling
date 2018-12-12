@@ -62,13 +62,13 @@ public class OperationThread implements Runnable {
         logSystem.logEndWorkAtFile(file.getName().replace("INPROGRESS", ""));
     }
 
-    private void executeQuery(String query) throws SQLException {
+    public void executeQuery(String query) throws SQLException {
         Statement stmt = DatabaseAutofilling.conn.createStatement();
         Integer howMany = stmt.executeUpdate(query);
         logSystem.logHowManyUpdated(howMany);
     }
 
-    private String createInsertQuery(BufferedReader br) throws IOException {
+    public String createInsertQuery(BufferedReader br) throws IOException {
         String table = br.readLine().trim();
         String fields = br.readLine().trim();
 
@@ -86,12 +86,11 @@ public class OperationThread implements Runnable {
         return query;
     }
 
-    private String createDeleteQuery(BufferedReader br) throws IOException {
+    public String createDeleteQuery(BufferedReader br) throws IOException {
         String table = br.readLine().trim();
         String id = br.readLine().trim();
 
         String query = "DELETE FROM " + table + " WHERE " +  id + " IN ( ";
-
         while(true){
             query += br.readLine().trim();
             if(br.ready())

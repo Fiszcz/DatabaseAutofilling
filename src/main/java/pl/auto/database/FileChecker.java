@@ -12,7 +12,7 @@ public class FileChecker {
 
     public void run() {
 
-        File folder = new File("C:\\Users\\Fiszcz\\Downloads\\Oswietlenie_filu\\pl.auto.database\\src\\main\\resources\\toDo");
+        File folder = new File("E:\\Testowanie\\DatabaseAutofilling\\src\\main\\resources\\toDo");
         File[] listOfFiles = folder.listFiles();
 
         for (int i = 0; i < listOfFiles.length; i++) {

@@ -36,8 +36,8 @@ public class DatabaseAutofilling {
                 + "&useUnicode=yes&characterEncoding=UTF-8&serverTimezone=UTC";
     }
 
-    private static Configuration getConfiguration() {
-        File file = new File("C:\\Users\\Fiszcz\\Downloads\\Oswietlenie_filu\\pl.auto.database\\src\\main\\resources\\configurationDA.txt");
+    public static Configuration getConfiguration() {
+        File file = new File("E:\\Testowanie\\DatabaseAutofilling\\src\\main\\resources\\configurationDA.txt");
         Configuration configuration = new Configuration();
         BufferedReader br;
 
