@@ -14,6 +14,7 @@ import org.junit.Assert;
 
 public class Tests {
     private File file;
+    private String folderPath = "C:\\Projects\\DatabaseAutofilling\\src\\main\\resources";
 
 
     @Test
@@ -179,5 +180,64 @@ public class Tests {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Test
+    public void testSeparators()
+    {
+        DatabaseAutofilling.logSystem = new Log();
+        DatabaseAutofilling.logSystem.logStartApp();
+
+        File folder = new File(folderPath + "\\toDo");
+        String path = folder + "\\sepTest1.txt";
+
+        try{
+            Configuration config = DatabaseAutofilling.getConfiguration();
+            String connectionAdress = DatabaseAutofilling.getConnectionAdress(config);
+            DatabaseAutofilling.conn = DriverManager.getConnection(connectionAdress);
+
+
+            file = new File(path);
+
+            Writer writer = new BufferedWriter( new FileWriter(file));
+            writer.write("INSERT\n" +
+                    "test\n" +
+                    "id;name;surname\n" +
+                    "1000;'aaa';'bbb'\n" +
+                    "1001;'cccc';'ddd'\n" +
+                    "1002;'eeee';'fff'");
+            writer.flush();
+            writer.close();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        char separator = ';';
+        OperationThread ot = new OperationThread(file, separator);
+        Thread t =  new Thread(ot);
+        t.start();
+
+        try
+        {
+            t.join();
+
+            PreparedStatement statement = DatabaseAutofilling.conn.prepareStatement("DELETE FROM test WHERE ID = 1000 OR ID = 1001 OR ID = 1002",Statement.NO_GENERATED_KEYS);
+            int affectedRows = statement.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        File fileInProgress = new File(path + "INPROGRESS");
+        File fileDone = new File(folderPath + "\\done\\sepTest1.txt");
+
+        Assert.assertTrue(!file.exists());
+        Assert.assertTrue(!fileInProgress.exists());
+        Assert.assertTrue(fileDone.exists());
+        fileDone.delete();
+
     }
 }
