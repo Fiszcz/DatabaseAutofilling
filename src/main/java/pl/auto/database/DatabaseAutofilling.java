@@ -60,6 +60,9 @@ public class DatabaseAutofilling {
                     case "frequencyOfRefresh":
                         configuration.setFrequencyOfRefresh(Integer.valueOf(parts[1]));
                         break;
+                    case "separator":
+                        configuration.setSeparator(parts[1].charAt(0));
+                        break;
                 }
             }
 

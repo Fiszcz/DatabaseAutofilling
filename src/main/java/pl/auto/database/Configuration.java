@@ -8,12 +8,15 @@ public class Configuration {
 
     private String password;
 
+    private char separator;
+
     private Integer frequencyOfRefresh;
 
     public Configuration() {
         this.database = "database";
         this.username = "root";
         this.password = "root";
+        this.separator = ';';
         this.frequencyOfRefresh = 2500;
     }
 
@@ -27,6 +30,10 @@ public class Configuration {
 
     public String getPassword() {
         return password;
+    }
+
+    public char getSeparator() {
+        return separator;
     }
 
     public Integer getFrequencyOfRefresh() {
@@ -45,6 +52,10 @@ public class Configuration {
         this.password = password;
     }
 
+    public void setSeparator(char separator) {
+        this.separator = separator;
+    }
+
     public void setFrequencyOfRefresh(Integer frequencyOfRefresh) {
         this.frequencyOfRefresh = frequencyOfRefresh;
     }
@@ -55,6 +66,7 @@ public class Configuration {
                 "database='" + database + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", separator='" + separator + '\'' +
                 ", frequencyOfRefresh=" + frequencyOfRefresh +
                 '}';
     }

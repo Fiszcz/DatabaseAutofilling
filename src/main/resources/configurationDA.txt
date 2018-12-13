@@ -1,4 +1,5 @@
 username=root
 password=root
 database=autofilling
+separator=;
 frequencyOfRefresh=1000
