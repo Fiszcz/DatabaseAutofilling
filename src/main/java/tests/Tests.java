@@ -13,6 +13,16 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Assert;
 
 public class Tests {
+    private File file;
+    @Test
+    public void testrenameFile(){
+        file = new File("testDelete.txt");
+        OperationThread ot = new OperationThread(file);
+        ot.renameFile();
+        String path="testDelete.txtINPROGRESS";
+        Assert.assertEquals(path, ot.file.getName());
+
+    }
 
     @Test
     public void testJoin() {

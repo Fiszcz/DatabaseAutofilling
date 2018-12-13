@@ -10,7 +10,8 @@ import static pl.auto.database.DatabaseAutofilling.logSystem;
 
 public class OperationThread implements Runnable {
 
-    private File file;
+
+    public static File file;
 
     public OperationThread(File file) {
         this.file = file;
@@ -68,7 +69,7 @@ public class OperationThread implements Runnable {
         logSystem.logHowManyUpdated(howMany);
     }
 
-    public String createInsertQuery(BufferedReader br) throws IOException {
+    public static String createInsertQuery(BufferedReader br) throws IOException {
         String table = br.readLine().trim();
         String fields = br.readLine().trim();
 
@@ -117,13 +118,13 @@ public class OperationThread implements Runnable {
         return result.toString();
     }
 
-    private void renameFile() {
+    public void renameFile() {
         File renamedFile = new File(file.getAbsolutePath() + "INPROGRESS");
+//        logSystem.logStartWorkAtFile(file.getName());
 
-        logSystem.logStartWorkAtFile(file.getName());
-
-        file.renameTo(renamedFile);
+        boolean b=file.renameTo(renamedFile);
         file = renamedFile;
+
     }
 
 }
