@@ -14,6 +14,53 @@ import org.junit.Assert;
 
 public class Tests {
     private File file;
+
+
+    @Test
+    public void testCreateInsertQuery() throws IOException {
+        String fileContent = "programmingLanguages\n"
+                + "language;rank;change;share;trend\n"
+                + "Python;1;+1;25.36%;+5.2%\n"
+                + "Java;2;-1;21.56%;-1.1%\n"
+                + "Javascript;3;+1;8.4%;+0.0%\n"
+                + "C#;4;+1;7.63%;-0.4%\n"
+                + "PHP;5;-2;7.31%;-1.3%";
+
+        Reader inputString = new StringReader(fileContent);
+        BufferedReader reader = new BufferedReader(inputString);
+
+        String query_received = OperationThread.createInsertQuery(reader);
+        String query_expected = "INSERT INTO programmingLanguages (language,rank,change,share,trend) VALUES "
+            +"(Python,1,+1,25.36%,+5.2%) "
+            +"(Java,2,-1,21.56%,-1.1%) "
+            +"(Javascript,3,+1,8.4%,+0.0%) "
+            +"(C#,4,+1,7.63%,-0.4%) "
+            +"(PHP,5,-2,7.31%,-1.3%);";
+
+        Assert.assertEquals(query_received, query_expected);
+
+
+    }
+
+//    @Test
+//    public void testcreateInsertQuery(){
+//        BufferedReader br;
+//        try {
+//            br = new BufferedReader(new FileReader(file));
+//            String tableName = "test";
+//            String insert = "insert into " + tableName + " (id, name, surname) values (null, 'Jacek', 'Klimek')";
+//            String create;
+//            create = OperationThread.createInsertQuery(br);
+//            Assert.assertEquals(insert,create);
+//        }  catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
+
     @Test
     public void testrenameFile(){
         file = new File("testDelete.txt");

@@ -73,16 +73,16 @@ public class OperationThread implements Runnable {
         String table = br.readLine().trim();
         String fields = br.readLine().trim();
 
-        String query = "INSERT INTO " + table + " (" + join(fields.split(";"), ",") + ") VALUES ";
-        while(true){
-            query += " (" + join(br.readLine().trim().split(";"), ",") + ")";
-            if(br.ready())
-                query += ",";
-            else{
-                query += ";";
-                break;
-            }
+        String query = "INSERT INTO " + table + " (" + join(fields.split(";"), ",") + ") VALUES";
+
+
+        for (String line = br.readLine(); line != null; line = br.readLine()) {
+            query += " (" + join(line.trim().split(";"), ",") + ")";
         }
+        query += ";";
+        br.close();
+
+
 
         return query;
     }
