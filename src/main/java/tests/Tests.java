@@ -240,4 +240,67 @@ public class Tests {
         fileDone.delete();
 
     }
+
+
+    @Test
+    public void testConfig()
+    {
+        DatabaseAutofilling.logSystem = new Log();
+        DatabaseAutofilling.logSystem.logStartApp();
+
+        String db = "Test";
+        String name = "xD";
+        String pass = "classified";
+        Integer freq = 2000;
+        char sep = '?';
+
+        File configFile = new File(folderPath + "\\configurationDA.txt");
+        String prevConfig = "";
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(configFile));
+
+            String st;
+            while ((st = br.readLine()) != null)
+                prevConfig += (st + '\n');
+            prevConfig = prevConfig.substring(0, prevConfig.length() -1);
+
+            br.close();
+
+            Writer writer = new BufferedWriter( new FileWriter(configFile));
+            writer.write(String.format("username=%s\n" +
+                    "password=%s\n" +
+                    "database=%s\n" +
+                    "separator=%s\n" +
+                    "frequencyOfRefresh=%s", name, pass, db, sep, freq.toString()));
+            writer.flush();
+            writer.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        Configuration config = DatabaseAutofilling.getConfiguration();
+
+        try{
+            Writer writer = new BufferedWriter( new FileWriter(configFile));
+            writer.write(prevConfig);
+            writer.flush();
+            writer.close();
+        }
+            catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        Assert.assertEquals(db, config.getDatabase());
+        Assert.assertEquals(name, config.getUsername());
+        Assert.assertEquals(pass, config.getPassword());
+        Assert.assertEquals(sep, config.getSeparator());
+        Assert.assertEquals(freq, config.getFrequencyOfRefresh());
+
+
+    }
 }
