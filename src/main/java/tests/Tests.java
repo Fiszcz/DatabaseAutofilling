@@ -29,13 +29,15 @@ public class Tests {
 
         Reader inputString = new StringReader(fileContent);
         BufferedReader reader = new BufferedReader(inputString);
+        
+        OperationThread operationThread = new OperationThread(new File("fdsdf"), ';');
 
         String query_received = OperationThread.createInsertQuery(reader);
         String query_expected = "INSERT INTO programmingLanguages (language,rank,change,share,trend) VALUES "
-            +"(Python,1,+1,25.36%,+5.2%) "
-            +"(Java,2,-1,21.56%,-1.1%) "
-            +"(Javascript,3,+1,8.4%,+0.0%) "
-            +"(C#,4,+1,7.63%,-0.4%) "
+            +"(Python,1,+1,25.36%,+5.2%), "
+            +"(Java,2,-1,21.56%,-1.1%), "
+            +"(Javascript,3,+1,8.4%,+0.0%), "
+            +"(C#,4,+1,7.63%,-0.4%), "
             +"(PHP,5,-2,7.31%,-1.3%);";
 
         Assert.assertEquals(query_received, query_expected);
