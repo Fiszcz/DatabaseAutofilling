@@ -25,7 +25,7 @@ public class DatabaseAutofilling {
             Runtime.getRuntime().exit(3);
         }
 
-        new FileChecker(configuration.getFrequencyOfRefresh()).run();
+        new FileChecker(configuration.getFrequencyOfRefresh(), configuration.getSeparator()).run();
 
     }
 

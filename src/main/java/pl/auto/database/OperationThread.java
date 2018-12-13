@@ -12,9 +12,11 @@ public class OperationThread implements Runnable {
 
 
     public static File file;
+    public static char separator;
 
-    public OperationThread(File file) {
+    public OperationThread(File file, char separator) {
         this.file = file;
+        this.separator = separator;
     }
 
     public void run() {

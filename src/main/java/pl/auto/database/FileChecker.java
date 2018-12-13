@@ -7,9 +7,11 @@ import java.io.PrintWriter;
 public class FileChecker {
 
     private Integer frequencyOfRefresh;
+    private char separator;
 
-    public FileChecker(Integer frequencyOfRefresh) {
+    public FileChecker(Integer frequencyOfRefresh, char separator) {
         this.frequencyOfRefresh = frequencyOfRefresh;
+        this.separator = separator;
     }
 
     public void save(String tekst) throws FileNotFoundException {
@@ -27,7 +29,7 @@ public class FileChecker {
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile() && !listOfFiles[i].getName().endsWith("INPROGRESS")) {
                 DatabaseAutofilling.logSystem.logNewFile(listOfFiles[i].getName());
-                Runnable r = new OperationThread(listOfFiles[i]);
+                Runnable r = new OperationThread(listOfFiles[i], separator);
 
                 new Thread(r).start();
             }

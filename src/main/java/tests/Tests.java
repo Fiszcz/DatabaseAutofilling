@@ -65,7 +65,7 @@ public class Tests {
     @Test
     public void testrenameFile(){
         file = new File("testDelete.txt");
-        OperationThread ot = new OperationThread(file);
+        OperationThread ot = new OperationThread(file, ';');
         ot.renameFile();
         String path="testDelete.txtINPROGRESS";
         Assert.assertEquals(path, ot.file.getName());
@@ -152,7 +152,7 @@ public class Tests {
                 /* read file and delete */
                 BufferedReader br;
                 String whichOperation = "";
-                OperationThread operationThread = new OperationThread(file);
+                OperationThread operationThread = new OperationThread(file, ';');
                 try {
                     br = new BufferedReader(new FileReader(file));
                     String query;
