@@ -37,7 +37,7 @@ public class DatabaseAutofilling {
     }
 
     public static Configuration getConfiguration() {
-        File file = new File("E:\\Testowanie\\DatabaseAutofilling\\src\\main\\resources\\configurationDA.txt");
+        File file = new File("/home/scresh/IdeaProjects/DatabaseAutofilling/src/main/resources/configurationDA.txt");
         Configuration configuration = new Configuration();
         BufferedReader br;
 

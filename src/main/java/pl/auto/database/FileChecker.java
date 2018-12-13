@@ -20,7 +20,7 @@ public class FileChecker {
     }
     public void run() {
 
-        File folder = new File("C:\\Users\\Franek\\Documents\\DatabaseAutofilling\\src\\main\\resources\\toDo");
+        File folder = new File("/home/scresh/IdeaProjects/DatabaseAutofilling/src/main/resources/toDo");
         File[] listOfFiles = folder.listFiles();
 
 
