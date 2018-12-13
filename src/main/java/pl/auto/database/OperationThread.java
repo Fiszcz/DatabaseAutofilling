@@ -79,8 +79,9 @@ public class OperationThread implements Runnable {
 
 
         for (String line = br.readLine(); line != null; line = br.readLine()) {
-            query += " (" + join(line.trim().split(Character.toString(separator)), ",") + ")";
+            query += " (" + join(line.trim().split(Character.toString(separator)), ",") + "),";
         }
+        query = query.substring(0, query.length() - 1);
         query += ";";
         br.close();
 
